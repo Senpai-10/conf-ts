@@ -8,7 +8,7 @@ interface Opts {
      *
      * The parser will parse config and ignore file_name
      */
-    config?: string;
+    config_str?: string;
 }
 
 export class Config {
