@@ -22,6 +22,8 @@ export class Config {
 
     constructor(opts: Opts) {
         this.opts = opts;
+
+        this.parser();
     }
 
     public set() {}
@@ -29,11 +31,37 @@ export class Config {
     public remove() {}
 
     public empty() {}
+
     /** Set config file back to default values */
-    public default() {}
+    public default() {
+        if (!this.opts.default) {
+            // TODO create an empty file
+            return;
+        }
+
+        // TODO create file with this.opts.default as content
+    }
+
+    /** write config_str to config file
+     * `only if file_name is set` */
+    public save() {
+        if (!this.opts.file_name) {
+            return;
+        }
+    }
 
     /**
      * Parser config (note: run inside constructor)
      */
-    private parser() {}
+    private parser() {
+        let config_str = "";
+
+        if (this.opts.config_str && !this.opts.file_name) {
+            config_str = this.opts.config_str;
+        }
+        console.log(config_str);
+    }
 }
+
+// TODO move parsing logic to this class
+class Parser {}
