@@ -19,20 +19,38 @@ interface Opts {
     default?: string;
 }
 
+type Key = `${string}.${string}`;
+
 export class Config {
     private opts: Opts;
+    private parsed: Map<Key, string>;
 
     constructor(opts: Opts) {
         this.opts = opts;
+        this.parsed = new Map();
 
         this.parser();
     }
 
-    public set() {}
-    public get() {}
-    public remove() {}
+    public set(key: Key, value: string) {
+        this.parsed.set(key, value);
+    }
 
-    public empty() {}
+    public get(key: Key): string | undefined {
+        return this.parsed.get(key);
+    }
+
+    public remove(key: Key): boolean {
+        return this.parsed.delete(key);
+    }
+
+    public clear() {
+        this.parsed.clear();
+    }
+
+    public has(key: Key): boolean {
+        return this.parsed.has(key);
+    }
 
     /** Set config file back to default values */
     public default() {
@@ -95,7 +113,6 @@ export class Config {
         let current_group = "main";
 
         let config_str_lines = config_str.split("\n");
-        let parsed = new Map<string, string>();
 
         for (let i = 0; i < config_str_lines.length; i++) {
             let line = config_str_lines[i].trim();
@@ -119,8 +136,7 @@ export class Config {
             let key = split_line[0].trim();
             let value = split_line[1].trim();
 
-            parsed.set(`${current_group}.${key}`, value);
+            this.parsed.set(`${current_group}.${key}`, value);
         }
-        console.log(parsed.keys());
     }
 }
