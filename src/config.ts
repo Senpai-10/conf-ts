@@ -14,7 +14,7 @@ interface Opts {
      * used with default (class-method)
      * to overwrite the config file with this defaults
      */
-    default: string;
+    default?: string;
 }
 
 export class Config {
