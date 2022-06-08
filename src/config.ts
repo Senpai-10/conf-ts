@@ -1,6 +1,6 @@
 interface Opts {
     file_name?: string;
-    /** Config without file
+    /** Config string
      *
      * Example:
      *
@@ -9,6 +9,12 @@ interface Opts {
      * The parser will parse config and ignore file_name
      */
     config_str?: string;
+
+    /** Default config
+     * used with default (class-method)
+     * to overwrite the config file with this defaults
+     */
+    default: string;
 }
 
 export class Config {
