@@ -18,7 +18,7 @@ interface Opts {
 }
 
 export class Config {
-    opts: Opts;
+    private opts: Opts;
 
     constructor(opts: Opts) {
         this.opts = opts;
@@ -57,11 +57,22 @@ export class Config {
         let config_str = "";
 
         if (this.opts.config_str && !this.opts.file_name) {
-            config_str = this.opts.config_str;
+            config_str = this.opts.config_str.trim();
+        } else {
+            // TODO get config_str from config file (file_name) + trim string
+            // And call default if this.opts.default is set, Else create an empty file
         }
-        console.log(config_str);
+
+        // TODO parse config_str
+        // trim every line before parsing!
+        // Grammar:
+        // if line starts with ('//', '#', '"') ignore line (note: add suppert for multiline comments)
+        // if line starts '[' and ends with ']' it's a group
+        //      if any setting don't belong to any group add to 'main' group
+
+        const comment_signs = ["//", "#", '"'];
+
+        /// change `current_group` when you encounter a new group.
+        let current_group = "main";
     }
 }
-
-// TODO move parsing logic to this class
-class Parser {}
