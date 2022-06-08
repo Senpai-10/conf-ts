@@ -1,3 +1,5 @@
+import { existsSync, writeFileSync, readFileSync } from "fs";
+
 interface Opts {
     file_name?: string;
     /** Config string
@@ -59,8 +61,25 @@ export class Config {
         if (this.opts.config_str && !this.opts.file_name) {
             config_str = this.opts.config_str.trim();
         } else {
-            // TODO get config_str from config file (file_name) + trim string
-            // And call default if this.opts.default is set, Else create an empty file
+            if (this.opts.file_name) {
+                if (existsSync(this.opts.file_name)) {
+                    config_str = readFileSync(
+                        this.opts.file_name,
+                        "utf8"
+                    ).trim();
+                } else {
+                    if (this.opts.default) {
+                        writeFileSync(
+                            this.opts.file_name,
+                            this.opts.default.trim()
+                        );
+                        config_str = this.opts.default.trim();
+                    } else {
+                        writeFileSync(this.opts.file_name, "");
+                        config_str = "";
+                    }
+                }
+            }
         }
 
         // TODO parse config_str
@@ -74,5 +93,7 @@ export class Config {
 
         /// change `current_group` when you encounter a new group.
         let current_group = "main";
+
+        console.log(config_str);
     }
 }
