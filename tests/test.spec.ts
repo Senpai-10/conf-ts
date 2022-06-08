@@ -2,9 +2,11 @@ import { Config } from "../src/index";
 
 describe("Config", () => {
     const config = new Config({
-        // file_name: "test.conf",
-        config_str: "[main]\ntest=true",
-        // default: "[main]\ntest=true",
+        config_str: `
+        dir = "example/"
+        [global]
+        # this is a comment
+        test=true`,
     });
 
     it("Config init", () => {
@@ -17,6 +19,8 @@ describe("Config", () => {
             default: "[main]\ntest=true",
         });
 
-        // expect(default_config).toBeInstanceOf(default_config);
+        expect(default_config.get("main.test")).toBe("true");
     });
+
+    it("");
 });
