@@ -111,9 +111,6 @@ export class Config {
                 continue;
             }
 
-            console.log("current_group: " + current_group);
-            console.log("line: " + line);
-
             let split_line = line.split("=");
             let key = split_line[0].trim();
             let value = split_line[1].trim();
