@@ -89,11 +89,38 @@ export class Config {
         // if line starts '[' and ends with ']' it's a group
         //      if any setting don't belong to any group add to 'main' group
 
-        const comment_signs = ["//", "#", '"'];
+        const comment_signs = ["/", "#", '"'];
 
         /// change `current_group` when you encounter a new group.
         let current_group = "main";
 
-        console.log(config_str);
+        let config_str_lines = config_str.split("\n");
+        let parsed = new Map<string, string>();
+
+        for (let i = 0; i < config_str_lines.length; i++) {
+            let line = config_str_lines[i].trim();
+
+            // skip commented lines
+            // TODO Add suppert for multiline comments (/* */)
+            if (comment_signs.includes(line[0])) {
+                continue;
+            }
+
+            if (line.startsWith("[") && line.endsWith("]")) {
+                // Remove first and last chars
+                current_group = line.slice(1, -1);
+                continue;
+            }
+
+            console.log("current_group: " + current_group);
+            console.log("line: " + line);
+
+            let split_line = line.split("=");
+            let key = split_line[0].trim();
+            let value = split_line[1].trim();
+
+            parsed.set(`${current_group}.${key}`, value);
+        }
+        console.log(parsed.keys());
     }
 }
