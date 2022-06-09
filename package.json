@@ -8,7 +8,7 @@
     ],
     "scripts": {
         "build": "tsc",
-        "dev-test": "ts-node tests/test.ts",
+        "dev-test": "ts-node ./test.ts",
         "dev": "tsc-watch",
         "test": "jest",
         "format": "prettier --write \"src/**/*.ts\"",
