@@ -93,7 +93,6 @@ export class Config {
 
         /// change `current_group` when you encounter a new group.
         let current_group = "main";
-
         let config_str_lines = config_str.split("\n");
 
         for (let i = 0; i < config_str_lines.length; i++) {
