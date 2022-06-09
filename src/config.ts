@@ -110,6 +110,10 @@ export class Config {
                 continue;
             }
 
+            if (!line.includes("=")) {
+                continue;
+            }
+
             let split_line = line.split("=");
             let key = split_line[0].trim();
             let value = split_line[1].trim();
