@@ -1,4 +1,4 @@
-import { Config } from "../src";
+import { Config } from "./src";
 
 const config = new Config({
     config_str: `
