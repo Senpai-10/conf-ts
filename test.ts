@@ -2,10 +2,26 @@ import { Config } from "./src";
 
 const config = new Config({
     config_str: `
-    dir = example/ hi this is me
-    [global]
-    # this is a comment
-    test=true`,
+    # Comment1!
+    / Comment2!
+    " Comment3!
+
+    # Group of settings
+    [main]
+    host = localhost
+    port = 4000`,
+
+    default: `
+    # Comment1!
+    / Comment2!
+    " Comment3!
+
+    # Group of settings
+    [main]
+    host = localhost
+    port = 4000`,
+
+    // file_name: "config.conf",
 });
 
 console.log(config.get("global.test"));
