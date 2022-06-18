@@ -24,4 +24,5 @@ const config = new Config({
     // file_name: "config.conf",
 });
 
-console.log(config.get("global.test"));
+console.log(config.get("main.host"));
+console.log(config.get("main.port"));
